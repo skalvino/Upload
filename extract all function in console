@@ -1,0 +1,8 @@
+var list = []; for (let i in window) { if (typeof(window[i]) === "function") list.push(i); } console.log(list)
+
+
+to run function user function+()
+
+example:
+
+getFlag()
