@@ -1,0 +1,24 @@
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import serialization
+import base64
+
+# Function to extract modulus from DER-encoded x509 RSA certificate
+def extract_modulus_from_der(der_filename):
+    with open(der_filename, 'rb') as f:
+        der_data = f.read()
+
+    # Load DER-encoded certificate
+    cert = x509.load_der_x509_certificate(der_data, default_backend())
+
+    # Extract public key and modulus
+    public_key = cert.public_key()
+    rsa_public_key = public_key.public_numbers()
+    modulus = rsa_public_key.n
+
+    return modulus
+
+# Example usage
+der_filename = '2048b-rsa-example-cert.der'
+modulus = extract_modulus_from_der(der_filename)
+print("Modulus (as decimal):", modulus)
