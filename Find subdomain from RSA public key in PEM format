@@ -1,1 +1,4 @@
 openssl pkey -outform der -pubin -in XXXXXXXXXXXXXXXXX.pem -| sha256sum
+
+# vist search.censys.io
+# search in Certificate with the sha256sum u got
