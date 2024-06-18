@@ -1,0 +1,1 @@
+openssl pkey -outform der -pubin -in XXXXXXXXXXXXXXXXX.pem -| sha256sum
