@@ -1,0 +1,27 @@
+import paramiko
+import base64
+import struct
+
+def ssh_key_to_pem(key_file):
+    with open(key_file, 'r') as f:
+        key_contents = f.read().strip()
+    key_type, key_string, _ = key_contents.split()
+    data = base64.b64decode(key_string)
+    
+    # Unpack the data from bytes
+    int_len = 4
+    str_len = struct.unpack('>I', data[:int_len])[0]  # length of string
+    
+    # Find starting index of modulus, skip "ssh-rsa" part
+    start_index = int_len + str_len + int_len + int_len
+    modulus_length = struct.unpack('>I', data[start_index:start_index+int_len])[0]
+    
+    # Extract modulus
+    modulus = data[start_index+int_len:start_index+int_len+modulus_length]
+    return int.from_bytes(modulus, byteorder='big')
+
+# Replace 'bruce_rsa.pub' with your actual public key file path
+modulus = ssh_key_to_pem('bruce_rsa.pub')
+print(modulus)
+
+# Make sure you have paramiko installed in your Python environment (pip install paramiko). This script should correctly parse the SSH public key and print out the modulus ( n ) as a decimal integer.
