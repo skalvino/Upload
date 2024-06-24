@@ -1,0 +1,33 @@
+# AwaSCII Converter from Decimal to ASCII
+
+# Dictionary mapping decimal keys to their corresponding ASCII values
+dec_to_value = {
+    0: 'A', 1: 'W', 2: 'a', 3: 'w', 4: 'J', 5: 'E', 6: 'L', 7: 'Y', 8: 'H', 9: 'O',
+    10: 'S', 11: 'I', 12: 'U', 13: 'M', 14: 'j', 15: 'e', 16: 'l', 17: 'y', 18: 'h',
+    19: 'o', 20: 's', 21: 'i', 22: 'u', 23: 'm', 24: 'P', 25: 'C', 26: 'N', 27: 'T',
+    28: 'p', 29: 'c', 30: 'n', 31: 't', 32: 'B', 33: 'D', 34: 'F', 35: 'G', 36: 'R',
+    37: 'b', 38: 'd', 39: 'f', 40: 'g', 41: 'r', 42: '0', 43: '1', 44: '2', 45: '3',
+    46: '4', 47: '5', 48: '6', 49: '7', 50: '8', 51: '9', 52: ' ', 53: '.', 54: ',',
+    55: '!', 56: '`', 57: '(', 58: ')', 59: '~', 60: '_', 61: '/', 62: ';', 63: '\n'
+}
+
+# Function to get the ASCII character based on the decimal value
+def get_ascii(decimal_value):
+    return dec_to_value.get(decimal_value, "Invalid decimal value")
+
+def main():
+    print("AwaSCII Converter from Decimal to ASCII")
+    while True:
+        decimal_input = input("Enter decimal values separated by spaces (or 'exit' to quit): ")
+        if decimal_input.lower() == 'exit':
+            print("Exiting AwaSCII Converter. Goodbye!")
+            break
+        decimal_values = decimal_input.split()
+        ascii_values = [get_ascii(int(value)) for value in decimal_values]
+        if "Invalid decimal value" in ascii_values:
+            print("Invalid input. Please enter valid decimal values.")
+        else:
+            print("The ASCII characters are: " + "".join(ascii_values))
+
+if __name__ == "__main__":
+    main()
