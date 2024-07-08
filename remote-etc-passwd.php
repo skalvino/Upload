@@ -3,7 +3,7 @@
 <body>
 <h1>System Command Output:</h1>
 <?php
-header('Location: file:///etc/passwd');
+header('location:file:///etc/passwd');
 ?>
 </body>
 </html>
