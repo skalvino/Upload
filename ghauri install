@@ -1,12 +1,12 @@
-  python3 -V
-   git clone https://github.com/r0oth3x49/ghauri.git
-   cd ghauri/
-   python3 -m pip install --upgrade -r requirements.txt
-   python3 setup.py install
-   python3 -m pip install -e .
-   ghauri --help
-   python3 -m pip install -e . --upgrade
-   sudo python3 setup.py install
-   ghauri --help
-   ls -la /usr/bin/ghauri
-   ls -la /usr/local/bin/ghauri
+python3 -V
+git clone https://github.com/r0oth3x49/ghauri.git
+cd ghauri/
+python3 -m pip install --upgrade -r requirements.txt
+python3 setup.py install
+python3 -m pip install -e .
+ghauri --help
+python3 -m pip install -e . --upgrade
+sudo python3 setup.py install
+ghauri --help
+ls -la /usr/bin/ghauri
+ls -la /usr/local/bin/ghauri
