@@ -1,4 +1,4 @@
-```pip install arjun```
+`pip install arjun`
 
 fixing path
 
