@@ -1,0 +1,26 @@
+javascript:(function(){
+    output = '<html><head><title>skalvin Google URL Extractor</title><style type="text/css">body,table{font-family:Tahoma,Verdana,Segoe,sans-serif;font-size:11px;color:#000}h1,h2,th{color:#405850}th{text-align:left}h2{font-size:11px;margin-bottom:3px}</style></head><body>';
+    output += '<h1>skalvin Google URL Extractor</h1>';
+    pageAnchors = document.getElementsByTagName('a');
+    var linkcount = 0;
+    var linkLocation = '';
+
+    for (i = 0; i < pageAnchors.length; i++) {
+        var anchorLink = pageAnchors[i].href;
+        var anchorID = pageAnchors[i].id;
+
+        if (anchorLink !== '' && 
+            anchorLink.match(/^((?!google\.|cache|blogger.com|\.yahoo\.|youtube\.com\/\?gl=|youtube\.com\/results|javascript:|api\.technorati\.com|botw\.org\/search|del\.icio\.us\/url\/check|digg\.com\/search|search\.twitter\.com\/search|search\.yahoo\.com\/search|siteanalytics\.compete\.com|tools\.seobook\.com\/general\/keyword\/suggestions|web\.archive\.org\/web\/|whois\.domaintools\.com|www\.alexa\.com\/data\/details\/main|www\.bloglines\.com\/search|www\.majesticseo\.com\/search\.php|www\.semrush\.com\/info\/|www\.semrush\.com\/search\.php|www\.stumbleupon\.com\/url|wikipedia.org\/wiki\/Special:Search).)*$/i) &&
+            anchorID.match(/^((?!hdtb_more|hdtb_tls|uh_hl).)*$/i)) {
+            linkLocation += anchorLink + '<br />';
+            linkcount++;
+        }
+    }
+
+    output += '<h2>URL List</h2><div>' + linkLocation + '</div>';
+    output += '</body></html>';
+    with(window.open()) {
+        document.write(output);
+        document.close();
+    }
+})();
