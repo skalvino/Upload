@@ -1,0 +1,16 @@
+SIEM tools 
+There are many SIEM tools. The following are some SIEM tools commonly used in the cybersecurity industry:
+
+AlienVault® OSSIM™
+
+Chronicle
+
+Elastic
+
+Exabeam
+
+IBM QRadar® Security Intelligence Platform
+
+LogRhythm
+
+Splunk
